@@ -1,12 +1,12 @@
+import type { IApi } from "@/api/api.types";
 import type { INoteData } from "@/entities";
-import type { IDataProvider } from "./dataProvider.types";
-// @ts-ignore
-import noteJsonData from "./mocks/noteData.json";
+
+import noteJsonData from "./noteData.json";
 // import Utils from '../utils/utils';
 
 const notes = JSON.parse(JSON.stringify(noteJsonData));
 
-export class MocksDataProvider implements IDataProvider {
+export class Api implements IApi {
   getAllNotes(): Promise<INoteData[] | []> {
     return new Promise<INoteData[]>((resolve, reject) => {
       // const dataStatus = new Utils().getRandomValueFrom([

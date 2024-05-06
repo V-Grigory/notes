@@ -1,5 +1,6 @@
+import { describe, it, expect } from "vitest";
+
 import Utils from "./utils";
-import { mockNotesData } from "../entities";
 
 describe(">>> Utils", () => {
   it(">> test 1", () => {

@@ -1,6 +1,7 @@
-import { IGroup, IGroupData, GROUP_NAME_MIN_LENGTH } from "./group.types";
+import type { IGroup, IGroupData } from "@/entities";
+import { GROUP_NAME_MIN_LENGTH } from "@/entities";
 
-export class Group implements IGroup {
+export class GroupEntity implements IGroup {
   readonly id?: number;
   readonly title: string;
   readonly order?: number;

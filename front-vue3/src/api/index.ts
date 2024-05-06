@@ -17,3 +17,6 @@ const defaultConfig = {
 };
 
 export const DefaultAPIInstance = axios.create(defaultConfig);
+
+// export * from "./note/api.types";
+// export * from "./note";

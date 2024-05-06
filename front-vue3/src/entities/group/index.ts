@@ -1,3 +1,2 @@
-export * from "./group";
-export * from "./group.types";
-// export * from './note.mock.ts'
+export * from "./groupEntity";
+export * from "./groupEntity.types";

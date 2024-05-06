@@ -1,4 +1,4 @@
-import { INote, INoteData } from "@/entities";
+import type { INote, INoteData } from "@/entities";
 
 export class Note implements INote {
   readonly id?: number;

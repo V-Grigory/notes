@@ -1,7 +1,7 @@
-import { IServiceProvider } from "./serviceProvider.types";
-import { NotesService } from "../services";
-import { MocksDataProvider } from "../dataProvider";
+import type { IServiceProvider } from "./serviceProvider.types";
+import { Api } from "@/api/note";
+import { NotesService } from "@/services";
 
 export const serviceProvider = (): IServiceProvider => ({
-  notes: new NotesService(new MocksDataProvider()),
+  notes: new NotesService(new Api()),
 });

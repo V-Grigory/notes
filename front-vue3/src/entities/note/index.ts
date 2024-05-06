@@ -1,3 +1,2 @@
-export * from "./note";
-export * from "./note.types";
-export * from "./note.mock";
+export * from "./noteEntity";
+export * from "./noteEntity.types";

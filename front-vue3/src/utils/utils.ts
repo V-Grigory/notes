@@ -1,5 +1,5 @@
 class Utils {
-  getRandomValueFrom(values: any[]) {
+  getRandomValueFrom(values: any[]): any {
     if (!values.length) {
       return null;
     }
@@ -9,7 +9,7 @@ class Utils {
       return value;
     }
 
-    const getRandomIndex = () => {
+    const getRandomIndex = (): number => {
       const min = 1;
       const max = values.length;
       const randomNumber = Math.round(
