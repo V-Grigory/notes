@@ -1,7 +1,7 @@
 import type { INotesService } from "@/services";
 import type { INoteData } from "@/entities";
 import { Note } from "@/entities";
-import type { IApi } from "@/api/api.types";
+import type { IApi } from "@/api/note/types";
 
 export class NotesService implements INotesService {
   constructor(private readonly api: IApi) {}

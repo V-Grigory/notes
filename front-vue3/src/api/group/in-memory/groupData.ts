@@ -1,8 +1,7 @@
-import type { IApi } from "@/api/api.types";
+import type { IApi } from "@/api/group/types";
 import type { IGroupData } from "@/entities";
 
 import groupJsonData from "./groupData.json";
-// import Utils from '../utils/utils';
 
 const groups = JSON.parse(JSON.stringify(groupJsonData));
 

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { Api } from "@/api/note";
+import { Api } from "@/api/note/in-memory/noteData";
 import { NotesService } from "@/services";
 import type { INoteData } from "@/entities";
 
