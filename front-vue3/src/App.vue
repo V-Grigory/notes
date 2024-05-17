@@ -1,72 +1,55 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="wrapper">
-    <!--  <HelloWorld msg="You did it!" />-->
-    1122
-  </div>
+  <n-space vertical size="large">
+    <n-layout>
+      <n-layout-header>
+        <h2>Notes</h2>
+      </n-layout-header>
+
+      <n-layout has-sider>
+        <n-layout-sider content-style="padding: 24px;">
+          Handian Bridge
+        </n-layout-sider>
+
+        <n-layout-content content-style="padding: 24px;">
+          <pre>{{ notes }}</pre>
+        </n-layout-content>
+      </n-layout>
+
+      <n-layout-footer> by Grigory Volchok </n-layout-footer>
+    </n-layout>
+  </n-space>
 </template>
 
+<script setup lang="ts">
+import { ref } from "vue";
+import { serviceProvider } from "@/serviceProvider/serviceProvider";
+import type { INoteData } from "@/entities";
+
+const notes = ref<Array<INoteData>>([]);
+
+const getNotes = (): void => {
+  serviceProvider.notes
+    .getAllNotes()
+    .then((notesData: INoteData[] | []) => (notes.value = notesData));
+};
+getNotes();
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+h2 {
+  margin: 0;
+}
+.n-layout-header,
+.n-layout-footer {
+  background: #B5C0D0;
+  padding: 24px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.n-layout-sider {
+  background: rgba(128, 128, 128, 0.3);
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.n-layout-content {
+  background: rgba(128, 128, 128, 0.1);
 }
 </style>
