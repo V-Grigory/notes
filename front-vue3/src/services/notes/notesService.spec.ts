@@ -1,14 +1,14 @@
 import { describe, it, expect } from "vitest";
 
-import { Api } from "@/api/note/in-memory/noteData";
+import { NotesApi } from "@/api/note/in-memory/noteData";
 import { NotesService } from "@/services";
 import type { INoteData } from "@/entities";
 
-const apiNotes = new Api();
+const apiNotes = new NotesApi();
 const notesData: INoteData[] = await apiNotes.getAllNotes();
 
 describe(">>> Notes Service", () => {
-  const service = new NotesService(new Api());
+  const service = new NotesService(new NotesApi());
 
   describe(">> getAllNotes", () => {
     it("should return all notes", async () => {

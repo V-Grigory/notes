@@ -2,9 +2,9 @@ import { describe, it, expect } from "vitest";
 
 import { Note } from "@/entities";
 import type { INoteData } from "@/entities";
-import { Api } from "@/api/note/in-memory/noteData";
+import { NotesApi } from "@/api/note/in-memory/noteData";
 
-const notesInstance = new Api();
+const notesInstance = new NotesApi();
 const notesData: INoteData[] = await notesInstance.getAllNotes();
 
 describe(">>> Note", () => {

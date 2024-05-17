@@ -1,6 +1,6 @@
 import type { IGroupData } from "@/entities";
 
-export interface IApi {
+export interface IGroupsApi {
   getAllGroups(): Promise<IGroupData[] | []>;
   createGroup(data: IGroupData): Promise<void>;
 }

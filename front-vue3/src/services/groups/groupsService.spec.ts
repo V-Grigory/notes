@@ -1,14 +1,14 @@
 import { describe, it, expect } from "vitest";
 
-import { Api } from "@/api/group/in-memory/groupData";
+import { GroupsApi } from "@/api/group/in-memory/groupData";
 import { GroupsService } from "@/services";
 import type { IGroupData } from "@/entities";
 
-const apiGroups = new Api();
+const apiGroups = new GroupsApi();
 const groupsData: IGroupData[] = await apiGroups.getAllGroups();
 
 describe(">>> Groups Service", () => {
-  const service = new GroupsService(new Api());
+  const service = new GroupsService(new GroupsApi());
 
   describe(">> getAllGroups", () => {
     it("should return all groups", async () => {

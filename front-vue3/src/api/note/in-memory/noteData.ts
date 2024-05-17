@@ -1,4 +1,4 @@
-import type { IApi } from "@/api/note/types";
+import type { INotesApi } from "@/api/note/types";
 import type { INoteData } from "@/entities";
 
 import noteJsonData from "./noteData.json";
@@ -6,7 +6,7 @@ import noteJsonData from "./noteData.json";
 
 const notes = JSON.parse(JSON.stringify(noteJsonData));
 
-export class Api implements IApi {
+export class NotesApi implements INotesApi {
   getAllNotes(): Promise<INoteData[] | []> {
     return new Promise<INoteData[]>((resolve, reject) => {
       // const dataStatus = new Utils().getRandomValueFrom([

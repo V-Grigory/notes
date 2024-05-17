@@ -1,7 +1,9 @@
 import type { IServiceProvider } from "./serviceProvider.types";
-import { Api } from "@/api/note/in-memory/noteData";
-import { NotesService } from "@/services";
+import { NotesApi } from "@/api/note/in-memory/noteData";
+import { GroupsApi } from "@/api/group/in-memory/groupData";
+import { NotesService, GroupsService } from "@/services";
 
 export const serviceProvider: IServiceProvider = {
-  notes: new NotesService(new Api()),
+  notes: new NotesService(new NotesApi()),
+  groups: new GroupsService(new GroupsApi()),
 };

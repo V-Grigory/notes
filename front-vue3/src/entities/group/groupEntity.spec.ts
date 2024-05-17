@@ -2,9 +2,9 @@ import { describe, it, expect } from "vitest";
 
 import { GroupEntity } from "@/entities";
 import type { IGroupData } from "@/entities";
-import { Api } from "@/api/group/in-memory/groupData";
+import { GroupsApi } from "@/api/group/in-memory/groupData";
 
-const groupsInstance = new Api();
+const groupsInstance = new GroupsApi();
 const groupsData: IGroupData[] = await groupsInstance.getAllGroups();
 
 describe(">>> GroupEntity", () => {
