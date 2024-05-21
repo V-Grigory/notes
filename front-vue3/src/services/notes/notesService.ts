@@ -1,10 +1,10 @@
 import type { INotesService } from "@/services";
 import type { INoteData } from "@/entities";
 import { Note } from "@/entities";
-import type { IApi } from "@/api/note/types";
+import type { INotesApi } from "@/api/note/types";
 
 export class NotesService implements INotesService {
-  constructor(private readonly api: IApi) {}
+  constructor(private readonly api: INotesApi) {}
 
   getAllNotes(): Promise<INoteData[] | []> {
     return this.api.getAllNotes();
