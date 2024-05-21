@@ -7,7 +7,7 @@
 
       <n-layout has-sider>
         <n-layout-sider content-style="padding: 24px;">
-          Handian Bridge
+          <groups-list />
         </n-layout-sider>
 
         <n-layout-content content-style="padding: 24px;">
@@ -24,6 +24,7 @@
 import { ref } from "vue";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
 import type { INoteData } from "@/entities";
+import GroupsList from "@/components/groups/GroupsList.vue";
 
 const notes = ref<Array<INoteData>>([]);
 
@@ -41,14 +42,12 @@ h2 {
 }
 .n-layout-header,
 .n-layout-footer {
-  background: #B5C0D0;
+  background: #b5c0d0;
   padding: 24px;
 }
-
 .n-layout-sider {
   background: rgba(128, 128, 128, 0.3);
 }
-
 .n-layout-content {
   background: rgba(128, 128, 128, 0.1);
 }
