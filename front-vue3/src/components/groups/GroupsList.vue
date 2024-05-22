@@ -10,9 +10,9 @@
   >
     {{ group.title }}
   </n-button>
-  {{ store.groups }}
-  <br>
-  {{ store.selectedGroup }}
+<!--  {{ store.groups }}-->
+<!--  <br>-->
+<!--  {{ store.selectedGroup }}-->
 </template>
 
 <script setup lang="ts">

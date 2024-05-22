@@ -4,7 +4,7 @@ import type { IGroupData } from "@/entities";
 
 export const useGroupStore = defineStore("group", () => {
   const groups = ref<Array<IGroupData>>([]);
-  const selectedGroup = ref<IGroupData | {}>({});
+  const selectedGroup = ref<IGroupData>({ id: 0, title: "", order: 0 });
 
   const sortedGroups = computed((): Array<IGroupData> | [] => {
     const orderedGroups: Array<IGroupData> | [] = groups.value.filter(
@@ -27,5 +27,10 @@ export const useGroupStore = defineStore("group", () => {
     selectedGroup.value = group;
   }
 
-  return { groups, selectedGroup, sortedGroups, selectGroup };
+  return {
+    groups,
+    selectedGroup,
+    sortedGroups,
+    selectGroup,
+  };
 });
