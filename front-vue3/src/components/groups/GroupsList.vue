@@ -1,5 +1,18 @@
 <template>
+  <n-button
+    v-for="(group, index) in store.sortedGroups"
+    :key="index"
+    @click="selectGroup(group)"
+    strong
+    secondary
+    round
+    class="button"
+  >
+    {{ group.title }}
+  </n-button>
   {{ store.groups }}
+  <br>
+  {{ store.selectedGroup }}
 </template>
 
 <script setup lang="ts">
@@ -17,6 +30,16 @@ const getGroups = (): void => {
 };
 
 getGroups();
+
+const selectGroup = (group: IGroupData): void => {
+  store.selectGroup(group);
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.button {
+  display: block;
+  text-wrap: initial;
+  margin: 3px 0;
+}
+</style>

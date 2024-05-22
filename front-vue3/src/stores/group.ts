@@ -4,12 +4,28 @@ import type { IGroupData } from "@/entities";
 
 export const useGroupStore = defineStore("group", () => {
   const groups = ref<Array<IGroupData>>([]);
+  const selectedGroup = ref<IGroupData | {}>({});
 
-  // const doubleCount = computed(() => count.value * 2);
+  const sortedGroups = computed((): Array<IGroupData> | [] => {
+    const orderedGroups: Array<IGroupData> | [] = groups.value.filter(
+      (group: IGroupData) => group.order
+    );
+    const unOrderedGroups: Array<IGroupData> | [] = groups.value.filter(
+      (group: IGroupData) => !group.order
+    );
 
-  // function increment() {
-  //   count.value++;
-  // }
+    return [
+      ...orderedGroups.sort((a: IGroupData, b: IGroupData) => {
+        // @ts-ignore
+        return a.order - b.order;
+      }),
+      ...unOrderedGroups,
+    ];
+  });
 
-  return { groups };
+  function selectGroup(group: IGroupData): void {
+    selectedGroup.value = group;
+  }
+
+  return { groups, selectedGroup, sortedGroups, selectGroup };
 });
