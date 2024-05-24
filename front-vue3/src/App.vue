@@ -6,13 +6,15 @@
       </n-layout-header>
 
       <n-layout has-sider>
-        <n-layout-sider content-style="padding: 24px;">
-          <groups-list />
-        </n-layout-sider>
+        <n-message-provider placement="bottom-right">
+          <n-layout-sider content-style="padding: 24px;">
+            <groups-list />
+          </n-layout-sider>
 
-        <n-layout-content content-style="padding: 24px;">
-          <notes-list />
-        </n-layout-content>
+          <n-layout-content content-style="padding: 24px;">
+            <notes-list />
+          </n-layout-content>
+        </n-message-provider>
       </n-layout>
 
       <n-layout-footer> by Grigory Volchok </n-layout-footer>

@@ -19,4 +19,8 @@ export class GroupsService implements IGroupsService {
 
     return Promise.reject("GroupEntity is not valid");
   }
+
+  getInitGroup(): IGroupData {
+    return { id: 0, title: "", order: 0 };
+  }
 }
