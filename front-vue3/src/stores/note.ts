@@ -1,26 +1,42 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import type { INoteData } from "@/entities";
+import type { INotesData, IGroupData, INoteData } from "@/entities";
 
 export const useNoteStore = defineStore("note", () => {
-  const notes = ref<Array<INoteData>>([]);
+  const notes = ref<Array<INotesData>>([]);
+  const activeGroup = ref<IGroupData>({ groupId: 0, groupTitle: "", groupOrder: null });
 
-  const sortedNotes = computed((): Array<INoteData> | [] => {
-    const orderedNotes: Array<INoteData> | [] = notes.value.filter(
-      (note: INoteData) => note.order
+  function setActiveGroup(group: IGroupData): void {
+    activeGroup.value = group;
+  }
+
+  const orderedGroups = computed((): Array<IGroupData> | [] => {
+    const groups: IGroupData[] = notes.value.map((note: INotesData) => ({
+      groupId: note.groupId,
+      groupTitle: note.groupTitle,
+      groupOrder: note.groupOrder,
+    }));
+
+    const ordered: Array<IGroupData> | [] = groups.filter(
+        (group: IGroupData) => group.groupOrder
     );
-    const unOrderedNotes: Array<INoteData> | [] = notes.value.filter(
-      (note: INoteData) => !note.order
+    const unOrdered: Array<IGroupData> | [] = groups.filter(
+        (group: IGroupData) => !group.groupOrder
     );
 
     return [
-      ...orderedNotes.sort((a: INoteData, b: INoteData) => {
+      ...ordered.sort((a: IGroupData, b: IGroupData) => {
         // @ts-ignore
-        return a.order - b.order;
+        return a.groupOrder - b.groupOrder;
       }),
-      ...unOrderedNotes,
+      ...unOrdered,
     ];
   });
 
-  return { notes, sortedNotes };
+  return {
+    notes,
+    activeGroup,
+    setActiveGroup,
+    orderedGroups,
+  };
 });
