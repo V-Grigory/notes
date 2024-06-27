@@ -1,13 +1,9 @@
 <template>
   <div class="group-title">
-    {{ groupStore.selectedGroup.title }}
+    {{ groupStore.activeGroup.title }}
   </div>
 
-  <div
-    v-for="(note, index) in filteredNotes"
-    :key="index"
-    class="note"
-  >
+  <div v-for="(note, index) in filteredNotes" :key="index" class="note">
     <div class="note-title">
       <b>{{ note.title }}</b>
     </div>
@@ -15,8 +11,8 @@
       {{ note.value }}
     </div>
   </div>
-<!--  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-<!--  <pre>{{ noteStore.notes }}</pre>-->
+  <!--  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+  <!--  <pre>{{ noteStore.notes }}</pre>-->
 </template>
 
 <script setup lang="ts">
@@ -30,11 +26,11 @@ const groupStore = useGroupStore();
 const noteStore = useNoteStore();
 
 const filteredNotes = computed((): INoteData[] => {
-  return groupStore.selectedGroup.id
-    ? noteStore.sortedNotes.filter(
-        (note: INoteData) => note.groupId === groupStore.selectedGroup.id
+  return groupStore.activeGroup.id
+    ? noteStore.orderedNotes.filter(
+        (note: INoteData) => note.groupId === groupStore.activeGroup.id
       )
-    : noteStore.sortedNotes;
+    : noteStore.orderedNotes;
 });
 
 const getNotes = (): void => {
@@ -59,9 +55,7 @@ getNotes();
   border-radius: 5px;
 }
 .note-title {
-
 }
 .note-value {
-
 }
 </style>

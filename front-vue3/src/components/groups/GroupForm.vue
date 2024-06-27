@@ -10,11 +10,14 @@
     >
       <n-form :model="formValues">
         <n-form-item label="Title">
-          <n-input v-model:value="formValues.title" placeholder="Input Title" />
+          <n-input
+            v-model:value="formValues.groupTitle"
+            placeholder="Input Title"
+          />
         </n-form-item>
 
         <n-form-item label="Order">
-          <n-input-number v-model:value="formValues.order" />
+          <n-input-number v-model:value="formValues.groupOrder" />
         </n-form-item>
 
         <n-form-item>
@@ -45,8 +48,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "closeForm"): void;
   (e: "formSaved"): void;
+  (e: "formClosed"): void;
 }>();
 
 const isOpenModal = ref<boolean>(false);
@@ -66,7 +69,7 @@ const initFormValues = (): void => {
 
 const saveEdit = async () => {
   try {
-    await serviceProvider.groups.createGroup(formValues.value);
+    await serviceProvider.notes.saveGroup(formValues.value);
 
     emit("formSaved");
   } catch (errorMessage: any) {
@@ -75,7 +78,7 @@ const saveEdit = async () => {
 };
 
 const cancelEdit = (): void => {
-  emit("closeForm");
+  emit("formClosed");
 };
 </script>
 

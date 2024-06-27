@@ -1,18 +1,19 @@
 <template>
   <div
-    v-for="(group, index) in store.sortedGroups"
+    v-for="(group, index) in store.orderedGroups"
     :key="index"
     class="list-item-wrapper"
   >
     <n-button
-      @click="selectItem(group)"
+      @click="setActiveItem(group)"
       strong
       secondary
       round
       class="select-list-item-button"
     >
-      {{ group.title }}
+      {{ group.groupTitle }}
     </n-button>
+
     <edit-icon @click="editItem(group)" />
   </div>
 
@@ -26,61 +27,30 @@
   >
     +
   </n-button>
-
-  <group-form
-    :is-open-form="isOpenForm"
-    form-title="Добавить группу"
-    :form-data="itemFormData"
-    @form-saved="onFormSaved"
-    @close-form="closeForm"
-  />
-
-<!--  {{ store.groups }}-->
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import { useGroupStore } from "@/stores/group";
+import { useNoteStore } from "@/stores/note";
 import type { IGroupData } from "@/entities";
-import GroupForm from "@/components/groups/GroupForm.vue";
 import EditIcon from "@/components/ui/EditIcon.vue";
 
-const store = useGroupStore();
+const store = useNoteStore();
 
-const getGroups = (): void => {
-  serviceProvider.groups
-    .getAllGroups()
-    .then((groupsData: IGroupData[] | []) => {
-      store.groups.length = 0;
-      store.groups = [...groupsData];
-    });
-};
-getGroups();
+const emit = defineEmits<{
+  (e: "openForm", formData: IGroupData): void;
+}>();
 
-const selectItem = (group: IGroupData): void => {
-  store.selectGroup(group);
+const setActiveItem = (group: IGroupData): void => {
+  store.setActiveGroup(group);
 };
 
-const itemFormData = ref<IGroupData>(serviceProvider.groups.getInitGroup());
-
-const addItem = (): void => {
-  itemFormData.value = serviceProvider.groups.getInitGroup();
-  openForm();
-};
 const editItem = (item: IGroupData): void => {
-  itemFormData.value = item;
-  openForm();
+  emit("openForm", item);
 };
-
-const onFormSaved = (): void => {
-  getGroups();
-  closeForm();
+const addItem = (): void => {
+  emit("openForm", serviceProvider.notes.getInitGroup());
 };
-
-const isOpenForm = ref<boolean>(false);
-const openForm = () => (isOpenForm.value = true);
-const closeForm = () => (isOpenForm.value = false);
 </script>
 
 <style scoped>

@@ -8,11 +8,11 @@
       <n-layout has-sider>
         <n-message-provider placement="bottom-right">
           <n-layout-sider content-style="padding: 24px;">
-            <groups-list />
+            <groups-wrap />
           </n-layout-sider>
 
           <n-layout-content content-style="padding: 24px;">
-            <notes-list />
+<!--            <notes-list />-->
           </n-layout-content>
         </n-message-provider>
       </n-layout>
@@ -23,8 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import GroupsList from "@/components/groups/GroupsList.vue";
-import NotesList from "@/components/notes/NotesList.vue";
+import GroupsWrap from "@/components/groups/GroupsWrap.vue";
 </script>
 
 <style scoped>
