@@ -10,13 +10,13 @@ export interface INoteData {
   title: string;
   value: string;
   description?: string;
-  order?: number;
+  order?: number | null;
 }
 
 export interface IGroupData {
   readonly groupId?: number;
   groupTitle: string;
-  groupOrder?: number;
+  groupOrder?: number | null;
 }
 
 export interface INote extends INoteData {
