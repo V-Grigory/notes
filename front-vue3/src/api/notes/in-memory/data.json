@@ -1,0 +1,57 @@
+[
+  {
+    "groupId": 1,
+    "groupTitle": "группа первая",
+    "groupOrder": 1,
+    "notes": [
+      {
+        "id": 1,
+        "title": "запись первая",
+        "value": "запись первая - группа первая",
+        "description": null,
+        "order": 1
+      },
+      {
+        "id": 2,
+        "title": "запись вторая",
+        "value": "запись вторая - группа первая",
+        "description": "описание второй записи",
+        "order": 2
+      }
+    ]
+  },
+  {
+    "groupId": 2,
+    "groupTitle": "группа вторая",
+    "groupOrder": 2,
+    "notes": [
+      {
+        "id": 3,
+        "title": "запись третья",
+        "value": "запись третья - группа вторая",
+        "description": null,
+        "order": null
+      }
+    ]
+  },
+  {
+    "groupId": 3,
+    "groupTitle": "группа третья",
+    "groupOrder": null,
+    "notes": [
+      {
+        "id": 4,
+        "title": "запись четвертая",
+        "value": "запись четвертая - группа третья",
+        "description": "описание четвертой записи",
+        "order": 3
+      }
+    ]
+  },
+  {
+    "groupId": 4,
+    "groupTitle": "группа четвертая",
+    "groupOrder": 4,
+    "notes": []
+  }
+]
