@@ -1,2 +1,2 @@
-export * from "./notes";
-export * from "./groups";
+export * from "./notesService";
+export * from "./notesService.types";
