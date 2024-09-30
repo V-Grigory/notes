@@ -35,17 +35,22 @@ describe(">>> Notes Service", () => {
     });
 
     it("should ADD NEW group", async () => {
-      expect.assertions(2);
+      expect.assertions(3);
 
       const groupsLengthBeforeAdd = (await service.getNotes()).length;
 
       await service.saveGroup({
+        groupId: 0,
         groupTitle: "new Title",
+        groupOrder: 0,
       });
 
       const groupsAfterAdd = await service.getNotes();
 
       expect(groupsLengthBeforeAdd + 1).toBe(groupsAfterAdd.length);
+      expect(groupsAfterAdd[groupsAfterAdd.length - 1].groupId).toBeGreaterThan(
+        groupsWithNotes.map(g => g.groupId).sort()[0]
+      );
       expect(groupsAfterAdd[groupsAfterAdd.length - 1].groupTitle).toBe(
         "new Title"
       );

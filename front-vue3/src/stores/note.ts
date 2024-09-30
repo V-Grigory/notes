@@ -8,7 +8,7 @@ export const useNoteStore = defineStore("note", () => {
   const activeGroup = ref<IGroupData>({
     groupId: 0,
     groupTitle: "",
-    groupOrder: null,
+    groupOrder: 0,
   });
 
   function setActiveGroup(group: IGroupData): void {

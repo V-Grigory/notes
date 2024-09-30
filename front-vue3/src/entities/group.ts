@@ -2,16 +2,14 @@ import type { IGroup, IGroupData } from "./types";
 import { GROUP_NAME_MIN_LENGTH } from "./types";
 
 export class Group implements IGroup {
-  readonly groupId?: number;
+  groupId: number;
   readonly groupTitle: string;
-  readonly groupOrder?: number;
+  readonly groupOrder: number;
 
   constructor(data: IGroupData) {
-    if (data.groupId) {
-      this.groupId = data.groupId;
-    }
+    this.groupId = data.groupId;
     this.groupTitle = data.groupTitle;
-    this.groupOrder = data.groupOrder || undefined;
+    this.groupOrder = data.groupOrder;
   }
 
   validate(): boolean {

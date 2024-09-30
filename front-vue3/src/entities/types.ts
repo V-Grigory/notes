@@ -1,8 +1,18 @@
 export interface INotesData {
-  readonly groupId?: number;
+  readonly groupId: number;
   readonly groupTitle: string;
-  readonly groupOrder?: number;
+  readonly groupOrder: number;
   readonly notes: INoteData[] | [];
+}
+
+export interface IGroupData {
+  readonly groupId: number;
+  groupTitle: string;
+  groupOrder: number;
+}
+
+export interface IGroup extends IGroupData {
+  validate(): boolean;
 }
 
 export interface INoteData {
@@ -13,17 +23,7 @@ export interface INoteData {
   order?: number | null;
 }
 
-export interface IGroupData {
-  readonly groupId?: number;
-  groupTitle: string;
-  groupOrder?: number | null;
-}
-
 export interface INote extends INoteData {
-  validate(): boolean;
-}
-
-export interface IGroup extends IGroupData {
   validate(): boolean;
 }
 

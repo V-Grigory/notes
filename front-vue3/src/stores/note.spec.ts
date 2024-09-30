@@ -35,7 +35,7 @@ describe("Note Store", () => {
         {
           groupId: 3,
           groupTitle: "группа третья",
-          groupOrder: null,
+          groupOrder: 5,
         },
       ]);
     });
