@@ -10,39 +10,18 @@ const groupsWithNotes: INotesData[] = JSON.parse(groupsWithNotesAsString);
 
 describe(">>> Note", () => {
   describe(">> constructor", () => {
-    it("should instantiate id only if it was provided", () => {
+    it("should instantiate id", () => {
       const entity1 = new Note({
         ...groupsWithNotes[0].notes[0],
         id: 7,
       });
 
       expect(entity1.id).toBe(7);
-
-      const entity2 = new Note({
-        ...groupsWithNotes[0].notes[0],
-        id: undefined,
-      });
-
-      expect(entity2.id).toBeUndefined();
-    });
-
-    it("should instantiate order only if it was provided", () => {
-      const entity1 = new Note({
-        ...groupsWithNotes[0].notes[0],
-        order: 5,
-      });
-
-      expect(entity1.order).toBe(5);
-
-      const entity2 = new Note({
-        ...groupsWithNotes[0].notes[0],
-        order: undefined,
-      });
-
-      expect(entity2.order).toBeUndefined();
     });
 
     it("should instantiate description only if it was provided", () => {
+      expect.assertions(2);
+
       const entity1 = new Note({
         ...groupsWithNotes[0].notes[0],
         description: "text description",

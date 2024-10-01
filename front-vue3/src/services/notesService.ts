@@ -21,7 +21,7 @@ export class NotesService implements INotesService {
     });
   }
 
-  private getNewGroupId = (): number => {
+  private getNewId = (): number => {
     return Date.now();
   };
 
@@ -42,14 +42,14 @@ export class NotesService implements INotesService {
     const isSavingExistingGroup: boolean = group.groupId !== 0;
 
     if (isAddingGroup) {
-      group.groupId = this.getNewGroupId();
+      group.groupId = this.getNewId();
       // @ts-ignore
       this.notes.push(group);
     }
 
     if (isSavingExistingGroup) {
       const groupForChange: IGroupData | undefined = this.findGroupDataById(
-        group.groupId as number
+        group.groupId
       );
 
       if (!groupForChange) {
@@ -79,22 +79,28 @@ export class NotesService implements INotesService {
       return Promise.reject("Group for note changing don't exist!");
     }
 
-    if (noteData.id) {
+    const isAddingNote: boolean = note.id === 0;
+    const isSavingExistingNote: boolean = note.id !== 0;
+
+    if (isAddingNote) {
+      note.id = this.getNewId();
+      // @ts-ignore
+      notesItemData.notes.push(note);
+    }
+
+    if (isSavingExistingNote) {
       const noteForChange: INoteData | undefined = notesItemData.notes.find(
-        (note: INoteData) => note.id === noteData.id
+        (noteInData: INoteData) => noteInData.id === note.id
       );
 
       if (!noteForChange) {
         return Promise.reject("Note for change don't exist!");
       }
 
-      noteForChange.title = noteData.title;
-      noteForChange.value = noteData.value;
-      noteForChange.description = noteData.description;
-      noteForChange.order = noteData.order;
-    } else {
-      // @ts-ignore
-      notesItemData.notes.push(noteData);
+      noteForChange.title = note.title;
+      noteForChange.value = note.value;
+      noteForChange.description = note.description;
+      noteForChange.order = note.order;
     }
 
     return this.api.saveNotes(JSON.stringify(this.notes));

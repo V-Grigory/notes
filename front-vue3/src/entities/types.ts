@@ -16,11 +16,11 @@ export interface IGroup extends IGroupData {
 }
 
 export interface INoteData {
-  readonly id?: number;
+  readonly id: number;
   title: string;
   value: string;
   description?: string;
-  order?: number | null;
+  order: number;
 }
 
 export interface INote extends INoteData {

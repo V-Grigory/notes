@@ -34,6 +34,15 @@ describe(">>> Notes Service", () => {
       }
     });
 
+    it("should return error if doesn't exist group ID", async () => {
+      expect.assertions(1);
+      try {
+        await service.saveGroup({ ...groupsWithNotes[0], groupId: 10 });
+      } catch (e) {
+        expect(e).toMatch("Group for change don't exist!");
+      }
+    });
+
     it("should ADD NEW group", async () => {
       expect.assertions(3);
 
@@ -48,8 +57,12 @@ describe(">>> Notes Service", () => {
       const groupsAfterAdd = await service.getNotes();
 
       expect(groupsLengthBeforeAdd + 1).toBe(groupsAfterAdd.length);
+
+      const lastGroupId = groupsWithNotes
+        .map((group) => group.groupId)
+        .sort()[0];
       expect(groupsAfterAdd[groupsAfterAdd.length - 1].groupId).toBeGreaterThan(
-        groupsWithNotes.map(g => g.groupId).sort()[0]
+        lastGroupId
       );
       expect(groupsAfterAdd[groupsAfterAdd.length - 1].groupTitle).toBe(
         "new Title"
@@ -102,16 +115,18 @@ describe(">>> Notes Service", () => {
     });
 
     it("should ADD NEW note", async () => {
-      expect.assertions(4);
+      expect.assertions(5);
 
       const notesBeforeAdd = (await service.getNotes())[0].notes;
       const lengthBefore = notesBeforeAdd.length;
 
       await service.saveNote({
         noteData: {
+          id: 0,
           title: "new title1",
           value: "new value1",
           description: "new description1",
+          order: 0,
         },
         groupId: 1,
       });
@@ -120,6 +135,7 @@ describe(">>> Notes Service", () => {
 
       expect(lengthBefore + 1).toBe(notesAfterAdd.length);
 
+      expect(notesAfterAdd[2].id).not.toBe(0);
       expect(notesAfterAdd[2].title).toBe("new title1");
       expect(notesAfterAdd[2].value).toBe("new value1");
       expect(notesAfterAdd[2].description).toBe("new description1");
@@ -137,6 +153,7 @@ describe(">>> Notes Service", () => {
           title: "new title2",
           value: "new value2",
           description: "new description2",
+          order: 0,
         },
         groupId: 1,
       });

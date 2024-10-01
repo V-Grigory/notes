@@ -30,7 +30,7 @@
         "title": "запись третья",
         "value": "запись третья - группа вторая",
         "description": null,
-        "order": null
+        "order": 1
       }
     ]
   },
