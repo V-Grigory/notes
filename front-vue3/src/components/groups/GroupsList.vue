@@ -1,20 +1,20 @@
 <template>
   <div
-    v-for="(group, index) in store.orderedGroups"
+    v-for="(itemList, index) in store.orderedGroups"
     :key="index"
     class="list-item-wrapper"
   >
     <n-button
-      @click="setActiveItem(group)"
+      @click="setActiveItem(itemList)"
       strong
       secondary
       round
       class="select-list-item-button"
     >
-      {{ group.groupTitle }}
+      {{ itemList.groupTitle }}
     </n-button>
 
-    <edit-icon @click="editItem(group)" />
+    <edit-icon @click="editItem(itemList)" />
   </div>
 
   <n-button
@@ -41,8 +41,8 @@ const emit = defineEmits<{
   (e: "openForm", formData: IGroupData): void;
 }>();
 
-const setActiveItem = (group: IGroupData): void => {
-  store.setActiveGroup(group);
+const setActiveItem = (item: IGroupData): void => {
+  store.setActiveGroup(item);
 };
 
 const editItem = (item: IGroupData): void => {

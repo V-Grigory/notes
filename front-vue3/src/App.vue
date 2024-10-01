@@ -8,7 +8,7 @@
       <n-layout has-sider>
         <n-message-provider placement="bottom-right">
           <n-layout-sider content-style="padding: 24px;">
-            <groups-wrap />
+            <groups-wrap @form-saved="onFormSaved" />
           </n-layout-sider>
 
           <n-layout-content content-style="padding: 24px;">
@@ -23,7 +23,26 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
+
+import { useNoteStore } from "@/stores/note";
+import { serviceProvider } from "@/serviceProvider/serviceProvider";
+import type { INotesData } from "@/entities";
+
 import GroupsWrap from "@/components/groups/GroupsWrap.vue";
+
+const store = useNoteStore();
+
+onMounted(() => getNotes());
+
+const getNotes = (): void => {
+  serviceProvider.notes.getNotes().then((notes: INotesData[] | []) => {
+    store.notes.length = 0;
+    store.notes = [...notes];
+  });
+};
+
+const onFormSaved = (): void => getNotes();
 </script>
 
 <style scoped>

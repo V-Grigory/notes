@@ -11,24 +11,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 
 import GroupsList from "@/components/groups/GroupsList.vue";
 import GroupForm from "@/components/groups/GroupForm.vue";
 
-import { useNoteStore } from "@/stores/note";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import type { INotesData, IGroupData } from "@/entities";
+import type { IGroupData } from "@/entities";
 
-const store = useNoteStore();
+const emit = defineEmits<{
+  (e: "formSaved"): void;
+}>();
 
-onMounted(() => getNotes());
-
-const getNotes = (): void => {
-  serviceProvider.notes.getNotes().then((notes: INotesData[] | []) => {
-    store.notes.length = 0;
-    store.notes = [...notes];
-  });
+const closeForm = (): void => {
+  isOpenForm.value = false;
 };
 
 const isOpenForm = ref<boolean>(false);
@@ -39,12 +35,10 @@ const onOpenForm = (data: IGroupData): void => {
   isOpenForm.value = true;
 };
 
-const onFormClosed = (): void => {
-  isOpenForm.value = false;
+const onFormSaved = (): void => {
+  closeForm();
+  emit("formSaved");
 };
 
-const onFormSaved = (): void => {
-  onFormClosed();
-  getNotes();
-};
+const onFormClosed = (): void => closeForm();
 </script>
