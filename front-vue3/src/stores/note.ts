@@ -22,20 +22,7 @@ export const useNoteStore = defineStore("note", () => {
       groupOrder: note.groupOrder,
     }));
 
-    const ordered: Array<IGroupData> | [] = groups.filter(
-      (group: IGroupData) => group.groupOrder
-    );
-    const unOrdered: Array<IGroupData> | [] = groups.filter(
-      (group: IGroupData) => !group.groupOrder
-    );
-
-    return [
-      ...ordered.sort((a: IGroupData, b: IGroupData) => {
-        // @ts-ignore
-        return a.groupOrder - b.groupOrder;
-      }),
-      ...unOrdered,
-    ];
+    return groups.sort((a, b) => a.groupOrder - b.groupOrder);
   });
 
   return {

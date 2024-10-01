@@ -53,5 +53,11 @@
     "groupTitle": "группа четвертая",
     "groupOrder": 4,
     "notes": []
+  },
+  {
+    "groupId": 5,
+    "groupTitle": "группа пятая",
+    "groupOrder": 4,
+    "notes": []
   }
 ]
