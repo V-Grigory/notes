@@ -14,7 +14,7 @@
       {{ itemList.groupTitle }}
     </n-button>
 
-    <edit-icon @click="editItem(itemList)" />
+    <edit-icon @click="editItem(itemList)" class="edit-list-item-icon" />
   </div>
 
   <n-button
@@ -60,9 +60,18 @@ const addItem = (): void => {
   justify-content: space-between;
 }
 .select-list-item-button {
-  display: block;
   text-wrap: initial;
   margin: 3px 0;
+  width: 190px;
+  min-height: 34px;
+  height: auto;
+  padding: 10px 15px;
+}
+.edit-list-item-icon {
+  cursor: pointer;
+}
+.edit-list-item-icon:hover {
+  color: grey;
 }
 .add-list-item-button {
   margin-top: 15px;
