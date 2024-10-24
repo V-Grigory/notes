@@ -1,20 +1,20 @@
 <template>
   <div
-    v-for="(itemList, index) in store.orderedGroups"
+    v-for="(group, index) in store.orderedGroups"
     :key="index"
     class="list-item-wrapper"
   >
     <n-button
-      @click="setActiveItem(itemList)"
+      @click="setActiveItem(group)"
       strong
       secondary
       round
       class="select-list-item-button"
     >
-      {{ itemList.groupTitle }}
+      {{ group.groupTitle }}
     </n-button>
 
-    <edit-icon @click="editItem(itemList)" class="edit-list-item-icon" />
+    <edit-icon @click="editItem(group)" class="edit-list-item-icon" />
   </div>
 
   <n-button

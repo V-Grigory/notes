@@ -8,7 +8,7 @@
         "id": 1,
         "title": "запись первая",
         "value": "запись первая - группа первая",
-        "description": null,
+        "description": "",
         "order": 1
       },
       {
@@ -29,7 +29,7 @@
         "id": 3,
         "title": "запись третья",
         "value": "запись третья - группа вторая",
-        "description": null,
+        "description": "",
         "order": 1
       }
     ]

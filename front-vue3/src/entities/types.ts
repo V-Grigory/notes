@@ -19,7 +19,7 @@ export interface INoteData {
   readonly id: number;
   title: string;
   value: string;
-  description?: string;
+  description: string;
   order: number;
 }
 

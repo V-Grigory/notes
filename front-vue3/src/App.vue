@@ -12,7 +12,7 @@
           </n-layout-sider>
 
           <n-layout-content content-style="padding: 24px;">
-<!--            <notes-list />-->
+            <notes-wrap @form-saved="onFormSaved" />
           </n-layout-content>
         </n-message-provider>
       </n-layout>
@@ -30,6 +30,7 @@ import { serviceProvider } from "@/serviceProvider/serviceProvider";
 import type { INotesData } from "@/entities";
 
 import GroupsWrap from "@/components/groups/GroupsWrap.vue";
+import NotesWrap from "@/components/notes/NotesWrap.vue";
 
 const store = useNoteStore();
 

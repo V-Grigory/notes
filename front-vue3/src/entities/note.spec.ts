@@ -19,8 +19,8 @@ describe(">>> Note", () => {
       expect(entity1.id).toBe(7);
     });
 
-    it("should instantiate description only if it was provided", () => {
-      expect.assertions(2);
+    it("should instantiate description", () => {
+      expect.assertions(1);
 
       const entity1 = new Note({
         ...groupsWithNotes[0].notes[0],
@@ -28,13 +28,6 @@ describe(">>> Note", () => {
       });
 
       expect(entity1.description).toBe("text description");
-
-      const entity2 = new Note({
-        ...groupsWithNotes[0].notes[0],
-        description: undefined,
-      });
-
-      expect(entity2.description).toBeUndefined();
     });
   });
 

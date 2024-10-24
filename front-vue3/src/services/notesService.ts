@@ -109,4 +109,8 @@ export class NotesService implements INotesService {
   getInitGroup(): IGroupData {
     return { groupId: 0, groupTitle: "", groupOrder: 0 };
   }
+
+  getInitNote(): INoteData {
+    return { id: 0, title: "", value: "", description: "", order: 0 };
+  }
 }

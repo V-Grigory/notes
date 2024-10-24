@@ -1,45 +1,54 @@
 <template>
   <div class="group-title">
-    {{ groupStore.activeGroup.title }}
+    {{ store.activeGroup.groupTitle }}
   </div>
 
-  <div v-for="(note, index) in filteredNotes" :key="index" class="note">
-    <div class="note-title">
-      <b>{{ note.title }}</b>
+  <div v-for="(note, index) in store.groupNotes" :key="index" class="note">
+    <div class="note-attributes">
+      <div class="note-title">
+        <b>{{ note.title }}</b>
+      </div>
+      <div class="note-value">
+        {{ note.value }}
+      </div>
+      <div class="note-description">
+        {{ note.description }}
+      </div>
     </div>
-    <div class="note-value">
-      {{ note.value }}
-    </div>
+
+    <edit-icon @click="editItem(note)" class="edit-list-item-icon" />
   </div>
-  <!--  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-  <!--  <pre>{{ noteStore.notes }}</pre>-->
+
+  <n-button
+    @click="addItem"
+    strong
+    secondary
+    block
+    type="primary"
+    class="add-list-item-button"
+  >
+    +
+  </n-button>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import { useGroupStore } from "@/stores/group";
 import { useNoteStore } from "@/stores/note";
 import type { INoteData } from "@/entities";
+import EditIcon from "@/components/ui/EditIcon.vue";
 
-const groupStore = useGroupStore();
-const noteStore = useNoteStore();
+const store = useNoteStore();
 
-const filteredNotes = computed((): INoteData[] => {
-  return groupStore.activeGroup.id
-    ? noteStore.orderedNotes.filter(
-        (note: INoteData) => note.groupId === groupStore.activeGroup.id
-      )
-    : noteStore.orderedNotes;
-});
+const emit = defineEmits<{
+  (e: "openForm", formData: INoteData): void;
+}>();
 
-const getNotes = (): void => {
-  serviceProvider.notes
-    .getAllNotes()
-    .then((notesData: INoteData[] | []) => (noteStore.notes = notesData));
+const editItem = (item: INoteData): void => {
+  emit("openForm", item);
 };
-
-getNotes();
+const addItem = (): void => {
+  emit("openForm", serviceProvider.notes.getInitNote());
+};
 </script>
 
 <style scoped>
@@ -49,13 +58,30 @@ getNotes();
 }
 
 .note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 7px;
   padding: 5px 10px;
   border: 1px solid grey;
   border-radius: 5px;
 }
+.note-attributes {
+}
 .note-title {
 }
 .note-value {
+}
+.note-description {
+}
+
+.edit-list-item-icon {
+  cursor: pointer;
+}
+.edit-list-item-icon:hover {
+  color: grey;
+}
+.add-list-item-button {
+  margin-top: 15px;
 }
 </style>
