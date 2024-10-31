@@ -1,5 +1,6 @@
 <template>
   <notes-list
+    :group-title="store.activeGroup.groupTitle"
     :items="store.groupNotes"
     @edit-item="onEditItem"
     @add-item="onAddItem"
@@ -49,7 +50,7 @@ const onFormApplied = async (formData: INoteData): Promise<void> => {
   try {
     await serviceProvider.notes.saveNote({
       noteData: formData,
-      groupId: 1, // !
+      groupId: store.activeGroup.groupId,
     });
 
     emit("formSaved");

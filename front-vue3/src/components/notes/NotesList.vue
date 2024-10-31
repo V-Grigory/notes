@@ -1,7 +1,6 @@
 <template>
   <div class="group-title">
-<!--    {{ store.activeGroup.groupTitle }}-->
-    group title
+    {{ groupTitle }}
   </div>
 
   <div v-for="(item, index) in items" :key="index" class="note">
@@ -37,6 +36,7 @@ import type { INoteData } from "@/entities";
 import EditIcon from "@/components/ui/EditIcon.vue";
 
 defineProps<{
+  groupTitle: string;
   items: INoteData[] | [];
 }>();
 
@@ -48,6 +48,7 @@ const emit = defineEmits<{
 const editItem = (item: INoteData): void => {
   emit("editItem", item);
 };
+
 const addItem = (): void => {
   emit("addItem");
 };
