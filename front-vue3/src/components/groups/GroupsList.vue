@@ -1,20 +1,16 @@
 <template>
-  <div
-    v-for="(group, index) in store.orderedGroups"
-    :key="index"
-    class="list-item-wrapper"
-  >
+  <div v-for="(item, index) in items" :key="index" class="list-item-wrapper">
     <n-button
-      @click="setActiveItem(group)"
+      @click="setActiveItem(item)"
       strong
       secondary
       round
       class="select-list-item-button"
     >
-      {{ group.groupTitle }}
+      {{ item.groupTitle }}
     </n-button>
 
-    <edit-icon @click="editItem(group)" class="edit-list-item-icon" />
+    <edit-icon @click="editItem(item)" class="edit-list-item-icon" />
   </div>
 
   <n-button
@@ -30,26 +26,29 @@
 </template>
 
 <script setup lang="ts">
-import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import { useNoteStore } from "@/stores/note";
 import type { IGroupData } from "@/entities";
 import EditIcon from "@/components/ui/EditIcon.vue";
 
-const store = useNoteStore();
+defineProps<{
+  items: IGroupData[] | [];
+}>();
 
 const emit = defineEmits<{
+  (e: "setActiveGroup", item: IGroupData): void;
   (e: "openForm", formData: IGroupData): void;
+  (e: "addItem"): void;
 }>();
 
 const setActiveItem = (item: IGroupData): void => {
-  store.setActiveGroup(item);
+  emit("setActiveGroup", item);
 };
 
 const editItem = (item: IGroupData): void => {
   emit("openForm", item);
 };
+
 const addItem = (): void => {
-  emit("openForm", serviceProvider.notes.getInitGroup());
+  emit("addItem");
 };
 </script>
 

@@ -1,22 +1,23 @@
 <template>
   <div class="group-title">
-    {{ store.activeGroup.groupTitle }}
+<!--    {{ store.activeGroup.groupTitle }}-->
+    group title
   </div>
 
-  <div v-for="(note, index) in store.groupNotes" :key="index" class="note">
+  <div v-for="(item, index) in items" :key="index" class="note">
     <div class="note-attributes">
       <div class="note-title">
-        <b>{{ note.title }}</b>
+        <b>{{ item.title }}</b>
       </div>
       <div class="note-value">
-        {{ note.value }}
+        {{ item.value }}
       </div>
       <div class="note-description">
-        {{ note.description }}
+        {{ item.description }}
       </div>
     </div>
 
-    <edit-icon @click="editItem(note)" class="edit-list-item-icon" />
+    <edit-icon @click="editItem(item)" class="edit-list-item-icon" />
   </div>
 
   <n-button
@@ -32,22 +33,23 @@
 </template>
 
 <script setup lang="ts">
-import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import { useNoteStore } from "@/stores/note";
 import type { INoteData } from "@/entities";
 import EditIcon from "@/components/ui/EditIcon.vue";
 
-const store = useNoteStore();
+defineProps<{
+  items: INoteData[] | [];
+}>();
 
 const emit = defineEmits<{
   (e: "openForm", formData: INoteData): void;
+  (e: "addItem"): void;
 }>();
 
 const editItem = (item: INoteData): void => {
   emit("openForm", item);
 };
 const addItem = (): void => {
-  emit("openForm", serviceProvider.notes.getInitNote());
+  emit("addItem");
 };
 </script>
 

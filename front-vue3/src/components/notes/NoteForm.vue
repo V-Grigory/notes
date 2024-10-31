@@ -29,7 +29,7 @@
         </n-form-item>
 
         <n-form-item>
-          <n-button @click="saveEdit" type="success"> Сохранить </n-button>
+          <n-button @click="applyEdit" type="success"> Сохранить </n-button>
           <n-button @click="cancelEdit" style="margin-left: 15px">
             Отмена
           </n-button>
@@ -43,11 +43,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { useMessage } from "naive-ui";
 import type { INoteData } from "@/entities";
-import { serviceProvider } from "@/serviceProvider/serviceProvider";
-
-const message = useMessage();
 
 const props = defineProps<{
   isOpenForm: boolean;
@@ -56,7 +52,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "formSaved"): void;
+  (e: "formApplied", formData: INoteData): void;
   (e: "formClosed"): void;
 }>();
 
@@ -75,17 +71,8 @@ const initFormValues = (): void => {
   formValues.value = Object.assign({}, props.formData);
 };
 
-const saveEdit = async () => {
-  try {
-    await serviceProvider.notes.saveNote({
-      noteData: formValues.value,
-      groupId: 1, // !
-    });
-
-    emit("formSaved");
-  } catch (errorMessage: any) {
-    message.error(errorMessage);
-  }
+const applyEdit = (): void => {
+  emit("formApplied", formValues.value);
 };
 
 const cancelEdit = (): void => {

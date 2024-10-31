@@ -8,11 +8,11 @@
       <n-layout has-sider>
         <n-message-provider placement="bottom-right">
           <n-layout-sider content-style="padding: 24px;">
-            <groups-wrap @form-saved="onFormSaved" />
+            <groups-manager @form-saved="onFormSaved" />
           </n-layout-sider>
 
           <n-layout-content content-style="padding: 24px;">
-            <notes-wrap @form-saved="onFormSaved" />
+            <notes-manager @form-saved="onFormSaved" />
           </n-layout-content>
         </n-message-provider>
       </n-layout>
@@ -29,8 +29,8 @@ import { useNoteStore } from "@/stores/note";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
 import type { INotesData } from "@/entities";
 
-import GroupsWrap from "@/components/groups/GroupsWrap.vue";
-import NotesWrap from "@/components/notes/NotesWrap.vue";
+import GroupsManager from "@/components/groups/GroupsManager.vue";
+import NotesManager from "@/components/notes/NotesManager.vue";
 
 const store = useNoteStore();
 
