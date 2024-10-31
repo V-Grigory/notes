@@ -1,7 +1,7 @@
 <template>
   <notes-list
     :items="store.groupNotes"
-    @open-form="onOpenForm"
+    @edit-item="onEditItem"
     @add-item="onAddItem"
   />
 
@@ -35,8 +35,13 @@ const emit = defineEmits<{
 const isOpenForm = ref<boolean>(false);
 const formData = ref<INoteData>(serviceProvider.notes.getInitNote());
 
-const onOpenForm = (data: INoteData): void => {
+const onEditItem = (data: INoteData): void => {
   formData.value = data;
+  isOpenForm.value = true;
+};
+
+const onAddItem = (): void => {
+  formData.value = serviceProvider.notes.getInitNote();
   isOpenForm.value = true;
 };
 
@@ -52,11 +57,6 @@ const onFormApplied = async (formData: INoteData): Promise<void> => {
   } catch (errorMessage: any) {
     message.error(errorMessage);
   }
-};
-
-const onAddItem = (): void => {
-  formData.value = serviceProvider.notes.getInitNote();
-  isOpenForm.value = true;
 };
 
 const onFormClosed = (): void => closeForm();

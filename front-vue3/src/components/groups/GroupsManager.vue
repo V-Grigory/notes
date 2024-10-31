@@ -2,7 +2,7 @@
   <groups-list
     :items="store.orderedGroups"
     @set-active-group="onSetActiveItem"
-    @open-form="onOpenForm"
+    @edit-item="onEditItem"
     @add-item="onAddItem"
   />
 
@@ -40,8 +40,13 @@ const onSetActiveItem = (item: IGroupData): void => {
   store.setActiveGroup(item);
 };
 
-const onOpenForm = (data: IGroupData): void => {
+const onEditItem = (data: IGroupData): void => {
   formData.value = data;
+  isOpenForm.value = true;
+};
+
+const onAddItem = (): void => {
+  formData.value = serviceProvider.notes.getInitGroup();
   isOpenForm.value = true;
 };
 
@@ -54,11 +59,6 @@ const onFormApplied = async (formData: IGroupData): Promise<void> => {
   } catch (errorMessage: any) {
     message.error(errorMessage);
   }
-};
-
-const onAddItem = (): void => {
-  formData.value = serviceProvider.notes.getInitGroup();
-  isOpenForm.value = true;
 };
 
 const onFormClosed = (): void => closeForm();

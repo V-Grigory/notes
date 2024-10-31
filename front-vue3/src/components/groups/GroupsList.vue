@@ -35,7 +35,7 @@ defineProps<{
 
 const emit = defineEmits<{
   (e: "setActiveGroup", item: IGroupData): void;
-  (e: "openForm", formData: IGroupData): void;
+  (e: "editItem", formData: IGroupData): void;
   (e: "addItem"): void;
 }>();
 
@@ -44,7 +44,7 @@ const setActiveItem = (item: IGroupData): void => {
 };
 
 const editItem = (item: IGroupData): void => {
-  emit("openForm", item);
+  emit("editItem", item);
 };
 
 const addItem = (): void => {

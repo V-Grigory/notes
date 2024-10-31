@@ -41,12 +41,12 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "openForm", formData: INoteData): void;
+  (e: "editItem", formData: INoteData): void;
   (e: "addItem"): void;
 }>();
 
 const editItem = (item: INoteData): void => {
-  emit("openForm", item);
+  emit("editItem", item);
 };
 const addItem = (): void => {
   emit("addItem");
