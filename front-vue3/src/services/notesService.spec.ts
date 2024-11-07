@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 
 import { NotesService } from "@/services";
 import type { INotesData } from "@/entities";
-import { NotesApi } from "@/api/notes/in-memory/data";
+import { NotesApi } from "@/api/notes/in-memory";
 
 const notesApi = new NotesApi();
 const groupsWithNotesAsString: string = await notesApi.getNotes();

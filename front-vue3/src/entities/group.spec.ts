@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 
 import { Group } from "./group";
 import type { INotesData } from "./types";
-import { NotesApi } from "@/api/notes/in-memory/data";
+import { NotesApi } from "@/api/notes/in-memory";
 
 const notesApi = new NotesApi();
 const groupsWithNotesAsString: string = await notesApi.getNotes();
