@@ -11,4 +11,14 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  // for dev and preview modes
+  server: {
+    proxy: {
+      '/api/': {
+        target: 'http://localhost:80', // This is the Nginx container (which proxies to Node.js)
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, "/api/"),
+      },
+    },
+  },
 });
