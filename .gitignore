@@ -34,3 +34,5 @@ coverage
 .env.*.local
 .env
 
+api/node/notes.txt
+
