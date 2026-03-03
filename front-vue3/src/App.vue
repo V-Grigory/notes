@@ -36,14 +36,19 @@ const store = useNoteStore();
 
 onMounted(() => getNotes());
 
-const getNotes = (): void => {
-  serviceProvider.notes.getNotes().then((notes: INotesData[] | []) => {
+const getNotes = async (): Promise<void> => {
+  try {
+    const notes: INotesData[] | [] = await serviceProvider.notes.getNotes();
     store.notes.length = 0;
     store.notes = [...notes];
-  });
+  } catch (error) {
+    console.error('Ошибка при получении заметок:', error);
+    // Показать уведомление об ошибке пользователю
+    // Можно использовать message API из naive-ui
+  }
 };
 
-const onFormSaved = (): void => getNotes();
+const onFormSaved = (): Promise<void> => getNotes();
 </script>
 
 <style scoped>
