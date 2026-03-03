@@ -21,7 +21,7 @@ import { useMessage } from "naive-ui";
 
 import { useNoteStore } from "@/stores/note";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import type { INoteData } from "@/entities";
+import type { INoteData } from "@/types";
 
 import NotesList from "@/components/notes/NotesList.vue";
 import NoteForm from "@/components/notes/NoteForm.vue";

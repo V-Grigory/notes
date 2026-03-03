@@ -3,7 +3,7 @@ import { setActivePinia, createPinia } from "pinia";
 
 import { useNoteStore } from "@/stores/note";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import type { INotesData, IGroupData, INoteData } from "@/entities";
+import type { INotesData, IGroupData, INoteData } from "@/types";
 
 describe("Note Store", () => {
   beforeEach(() => {

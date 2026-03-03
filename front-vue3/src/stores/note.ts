@@ -1,6 +1,6 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import type { INotesData, INoteData, IGroupData } from "@/entities";
+import type { INotesData, INoteData, IGroupData } from "@/types";
 
 export const useNoteStore = defineStore("note", () => {
   const notes = ref<Array<INotesData>>([]);

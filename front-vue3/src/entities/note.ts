@@ -1,4 +1,4 @@
-import type { INote, INoteData } from "@/entities/index";
+import type { INote, INoteData } from "@/types";
 
 export class Note implements INote {
   id: number;

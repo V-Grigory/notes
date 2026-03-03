@@ -1,5 +1,5 @@
-import type { IGroup, IGroupData } from "./types";
-import { GROUP_NAME_MIN_LENGTH } from "./types";
+import type { IGroup, IGroupData } from "@/types";
+import { GROUP_NAME_MIN_LENGTH } from "@/types";
 
 export class Group implements IGroup {
   groupId: number;

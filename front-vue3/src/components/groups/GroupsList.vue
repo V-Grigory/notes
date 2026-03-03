@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IGroupData } from "@/entities";
+import type { IGroupData } from "@/types";
 import EditIcon from "@/components/ui/EditIcon.vue";
 
 defineProps<{

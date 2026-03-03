@@ -27,7 +27,7 @@ import { onMounted } from "vue";
 
 import { useNoteStore } from "@/stores/note";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import type { INotesData } from "@/entities";
+import type { INotesData } from "@/types";
 
 import GroupsManager from "@/components/groups/GroupsManager.vue";
 import NotesManager from "@/components/notes/NotesManager.vue";

@@ -1,4 +1,4 @@
-import type { INotesData, IGroupData, INoteData } from "@/entities";
+import type { INotesData, IGroupData, INoteData } from "@/types";
 
 export interface INotesService {
   getNotes(): Promise<INotesData[] | []>;

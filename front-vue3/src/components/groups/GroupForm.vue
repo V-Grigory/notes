@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import type { IGroupData } from "@/entities";
+import type { IGroupData } from "@/types";
 
 const props = defineProps<{
   isOpenForm: boolean;

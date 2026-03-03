@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import type { INoteData } from "@/entities";
+import type { INoteData } from "@/types";
 import EditIcon from "@/components/ui/EditIcon.vue";
 
 defineProps<{

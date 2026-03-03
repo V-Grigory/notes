@@ -1,5 +1,5 @@
 import type { INotesService } from "./notesService.types";
-import type { IGroupData, INoteData, INotesData } from "@/entities";
+import type { IGroupData, INoteData, INotesData } from "@/types";
 import { Group, Note } from "@/entities";
 
 import type { INotesApi } from "@/api/notes/types";

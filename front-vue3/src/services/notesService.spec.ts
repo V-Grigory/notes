@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { NotesService } from "@/services";
-import type { INotesData } from "@/entities";
+import type { INotesData } from "@/types";
 import { NotesApi } from "@/api/notes/in-memory";
 
 const notesApi = new NotesApi();

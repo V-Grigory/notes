@@ -21,7 +21,7 @@ import { useMessage } from "naive-ui";
 
 import { useNoteStore } from "@/stores/note";
 import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import type { IGroupData } from "@/entities";
+import type { IGroupData } from "@/types";
 
 import GroupsList from "@/components/groups/GroupsList.vue";
 import GroupForm from "@/components/groups/GroupForm.vue";

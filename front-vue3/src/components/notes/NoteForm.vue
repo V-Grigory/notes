@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import type { INoteData } from "@/entities";
+import type { INoteData } from "@/types";
 
 const props = defineProps<{
   isOpenForm: boolean;
