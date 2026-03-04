@@ -2,7 +2,7 @@ import type { INotesService } from "@/types";
 import type { IGroupData, INoteData, INotesData } from "@/types";
 import { Group, Note } from "@/entities";
 
-import type { INotesApi } from "@/api/notes/types";
+import type { INotesApi } from "@/types";
 
 export class NotesService implements INotesService {
   private notes: INotesData[] | [] = [];

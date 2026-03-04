@@ -1,4 +1,4 @@
-import type { INotesApi } from "@/api/notes/types";
+import type { INotesApi } from "@/types";
 
 import jsonData from "./data.json";
 

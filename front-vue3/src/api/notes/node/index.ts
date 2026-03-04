@@ -1,4 +1,4 @@
-import type { INotesApi } from "@/api/notes/types";
+import type { INotesApi } from "@/types";
 
 export class NotesApi implements INotesApi {
   async getNotes(): Promise<string> {
