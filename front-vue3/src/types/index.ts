@@ -28,3 +28,15 @@ export interface INote extends INoteData {
 }
 
 export const GROUP_NAME_MIN_LENGTH = 3;
+
+export interface INotesService {
+  getNotes(): Promise<INotesData[] | []>;
+  saveGroup(data: IGroupData): Promise<void>;
+  saveNote(data: { noteData: INoteData; groupId: number }): Promise<void>;
+  getInitGroup(): IGroupData;
+  getInitNote(): INoteData;
+}
+
+export interface IServiceProvider {
+  notes: INotesService;
+}

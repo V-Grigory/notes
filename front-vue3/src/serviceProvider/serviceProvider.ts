@@ -1,5 +1,6 @@
-import type { IServiceProvider } from "./serviceProvider.types";
+import type { IServiceProvider } from "@/types";
 import { NotesApi } from "@/api/notes/in-memory";
+// import { NotesApi } from "@/api/notes/node";
 import { NotesService } from "@/services";
 
 export const serviceProvider: IServiceProvider = {

@@ -1,4 +1,4 @@
-import type { INotesService } from "./notesService.types";
+import type { INotesService } from "@/types";
 import type { IGroupData, INoteData, INotesData } from "@/types";
 import { Group, Note } from "@/entities";
 
