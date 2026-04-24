@@ -2,7 +2,7 @@ import type { IGroup, IGroupData } from "@/types";
 import { GROUP_NAME_MIN_LENGTH } from "@/types";
 
 export class Group implements IGroup {
-  groupId: number;
+  readonly groupId: number;
   readonly groupTitle: string;
   readonly groupOrder: number;
 

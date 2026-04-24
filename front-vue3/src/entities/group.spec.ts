@@ -55,6 +55,7 @@ describe(">>> Group", () => {
       });
 
       expect(group.validate()).toBeTruthy();
+      expect(group.groupTitle).toBe('ттт');
     });
   });
 });

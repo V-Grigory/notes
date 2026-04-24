@@ -28,7 +28,10 @@ describe(">>> Notes Service", () => {
     it("should return error if doesn't pass validate (title is too short)", async () => {
       expect.assertions(1);
       try {
-        await service.saveGroup({ ...groupsWithNotes[0], groupTitle: "Ab" });
+        await service.saveGroup(groupsWithNotes, {
+          ...groupsWithNotes[0],
+          groupTitle: "Ab",
+        });
       } catch (e) {
         expect(e).toMatch("Group is not valid");
       }
@@ -37,7 +40,10 @@ describe(">>> Notes Service", () => {
     it("should return error if doesn't exist group ID", async () => {
       expect.assertions(1);
       try {
-        await service.saveGroup({ ...groupsWithNotes[0], groupId: 10 });
+        await service.saveGroup(groupsWithNotes, {
+          ...groupsWithNotes[0],
+          groupId: 10,
+        });
       } catch (e) {
         expect(e).toMatch("Group for change don't exist!");
       }
@@ -48,7 +54,7 @@ describe(">>> Notes Service", () => {
 
       const groupsLengthBeforeAdd = (await service.getNotes()).length;
 
-      await service.saveGroup({
+      await service.saveGroup(groupsWithNotes, {
         groupId: 0,
         groupTitle: "new Title",
         groupOrder: 0,
@@ -74,7 +80,7 @@ describe(">>> Notes Service", () => {
 
       const groupsLengthBeforeAdd = (await service.getNotes()).length;
 
-      await service.saveGroup({
+      await service.saveGroup(groupsWithNotes, {
         groupId: 3,
         groupTitle: "other title",
         groupOrder: 33,
@@ -93,7 +99,7 @@ describe(">>> Notes Service", () => {
     it("should return error if doesn't pass validate (title: '')", async () => {
       expect.assertions(1);
       try {
-        await service.saveNote({
+        await service.saveNote(groupsWithNotes, {
           noteData: { ...groupsWithNotes[0].notes[0], title: "" },
           groupId: 1,
         });
@@ -105,7 +111,7 @@ describe(">>> Notes Service", () => {
     it("should return error if doesn't pass validate (value: '')", async () => {
       expect.assertions(1);
       try {
-        await service.saveNote({
+        await service.saveNote(groupsWithNotes, {
           noteData: { ...groupsWithNotes[0].notes[0], value: "" },
           groupId: 1,
         });
@@ -120,7 +126,7 @@ describe(">>> Notes Service", () => {
       const notesBeforeAdd = (await service.getNotes())[0].notes;
       const lengthBefore = notesBeforeAdd.length;
 
-      await service.saveNote({
+      await service.saveNote(groupsWithNotes, {
         noteData: {
           id: 0,
           title: "new title1",
@@ -145,9 +151,9 @@ describe(">>> Notes Service", () => {
       expect.assertions(4);
 
       const notesBeforeAdd = (await service.getNotes())[0].notes;
-      const lengthBefore = notesBeforeAdd.length;
+      const lengthBeforeAdd = notesBeforeAdd.length;
 
-      await service.saveNote({
+      await service.saveNote(groupsWithNotes, {
         noteData: {
           id: 2,
           title: "new title2",
@@ -159,8 +165,9 @@ describe(">>> Notes Service", () => {
       });
 
       const notesAfterAdd = (await service.getNotes())[0].notes;
+      const lengthAfterAdd = notesAfterAdd.length;
 
-      expect(lengthBefore).toBe(notesAfterAdd.length);
+      expect(lengthBeforeAdd).toBe(lengthAfterAdd);
 
       expect(notesAfterAdd[1].title).toBe("new title2");
       expect(notesAfterAdd[1].value).toBe("new value2");

@@ -29,10 +29,6 @@ import NoteForm from "@/components/notes/NoteForm.vue";
 const message = useMessage();
 const store = useNoteStore();
 
-const emit = defineEmits<{
-  (e: "formSaved"): void;
-}>();
-
 const isOpenForm = ref<boolean>(false);
 const formData = ref<INoteData>(serviceProvider.notes.getInitNote());
 
@@ -48,12 +44,11 @@ const onAddItem = (): void => {
 
 const onFormApplied = async (formData: INoteData): Promise<void> => {
   try {
-    await serviceProvider.notes.saveNote({
+    await store.saveNote({
       noteData: formData,
       groupId: store.activeGroup.groupId,
     });
 
-    emit("formSaved");
     closeForm();
   } catch (errorMessage: any) {
     message.error(errorMessage);

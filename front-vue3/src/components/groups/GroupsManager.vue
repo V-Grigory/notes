@@ -29,10 +29,6 @@ import GroupForm from "@/components/groups/GroupForm.vue";
 const message = useMessage();
 const store = useNoteStore();
 
-const emit = defineEmits<{
-  (e: "formSaved"): void;
-}>();
-
 const isOpenForm = ref<boolean>(false);
 const formData = ref<IGroupData>(serviceProvider.notes.getInitGroup());
 
@@ -52,9 +48,8 @@ const onAddItem = (): void => {
 
 const onFormApplied = async (formData: IGroupData): Promise<void> => {
   try {
-    await serviceProvider.notes.saveGroup(formData);
+    await store.saveGroup(formData);
 
-    emit("formSaved");
     closeForm();
   } catch (errorMessage: any) {
     message.error(errorMessage);

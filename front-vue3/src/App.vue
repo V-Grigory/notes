@@ -8,11 +8,11 @@
       <n-layout has-sider>
         <n-message-provider placement="bottom-right">
           <n-layout-sider content-style="padding: 24px;">
-            <groups-manager @form-saved="onFormSaved" />
+            <groups-manager />
           </n-layout-sider>
 
           <n-layout-content content-style="padding: 24px;">
-            <notes-manager @form-saved="onFormSaved" />
+            <notes-manager />
           </n-layout-content>
         </n-message-provider>
       </n-layout>
@@ -24,31 +24,24 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-
 import { useNoteStore } from "@/stores/note";
-import { serviceProvider } from "@/serviceProvider/serviceProvider";
-import type { INotesData } from "@/types";
 
 import GroupsManager from "@/components/groups/GroupsManager.vue";
 import NotesManager from "@/components/notes/NotesManager.vue";
 
 const store = useNoteStore();
 
-onMounted(() => getNotes());
-
-const getNotes = async (): Promise<void> => {
+const loadNotes = async (): Promise<void> => {
   try {
-    const notes: INotesData[] | [] = await serviceProvider.notes.getNotes();
-    store.notes.length = 0;
-    store.notes = [...notes];
+    await store.loadNotes();
   } catch (error) {
-    console.error('Ошибка при получении заметок:', error);
+    console.error("Ошибка при получении заметок:", error);
     // Показать уведомление об ошибке пользователю
     // Можно использовать message API из naive-ui
   }
 };
 
-const onFormSaved = (): Promise<void> => getNotes();
+onMounted(() => loadNotes());
 </script>
 
 <style scoped>

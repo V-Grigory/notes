@@ -1,7 +1,7 @@
 import type { INote, INoteData } from "@/types";
 
 export class Note implements INote {
-  id: number;
+  readonly id: number;
   readonly title: string;
   readonly value: string;
   readonly description: string;

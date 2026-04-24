@@ -4,19 +4,19 @@ export interface IGroupData {
   groupOrder: number;
 }
 
-export interface INotesData {
-  readonly groupId: number;
-  readonly groupTitle: string;
-  readonly groupOrder: number;
-  readonly notes: INoteData[] | [];
-}
-
 export interface INoteData {
   readonly id: number;
   title: string;
   value: string;
   description: string;
   order: number;
+}
+
+export interface INotesData {
+  readonly groupId: number;
+  readonly groupTitle: string;
+  readonly groupOrder: number;
+  readonly notes: INoteData[] | [];
 }
 
 export interface IGroup extends IGroupData {
@@ -31,8 +31,11 @@ export const GROUP_NAME_MIN_LENGTH = 3;
 
 export interface INotesService {
   getNotes(): Promise<INotesData[] | []>;
-  saveGroup(data: IGroupData): Promise<void>;
-  saveNote(data: { noteData: INoteData; groupId: number }): Promise<void>;
+  saveGroup(notes: INotesData[], data: IGroupData): Promise<void>;
+  saveNote(
+    notes: INotesData[],
+    data: { noteData: INoteData; groupId: number }
+  ): Promise<void>;
   getInitGroup(): IGroupData;
   getInitNote(): INoteData;
 }
