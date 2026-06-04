@@ -1,0 +1,3 @@
+services:
+  notes-api-node:
+    command: "node app.js"

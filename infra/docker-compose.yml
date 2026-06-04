@@ -25,6 +25,3 @@ services:
       - notes-net
     restart: always
     command: "node_modules/.bin/nodemon app.js"
-    #     command: "node app.js"
-    #     command: "sh -c '(npm ls -g nodemon --depth=0 >/dev/null 2>&1 || npm install -g nodemon) && node_modules/.bin/nodemon app.js'"
-
