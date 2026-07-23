@@ -8,9 +8,13 @@ INFRA_DIR="$PROJECT_ROOT/infra"
 DIST_DIR="$FRONT_DIR/dist"
 BRANCH="master"
 NODE_IMAGE="node:23-alpine"
+DOMAIN="grigoryvolchok.ru"
+LETSENCRYPT_EMAIL="grigoryvolchok@gmail.com"
+CERTIFICATE_PATH="$INFRA_DIR/certbot/conf/live/$DOMAIN/fullchain.pem"
+COMPOSE_FILES=(-f docker-compose.yml -f docker-compose.server.yml)
 
 log() {
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+  echo "========= [$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
 fail() {
@@ -41,6 +45,7 @@ log "Frontend dir: $FRONT_DIR"
 log "Infra dir: $INFRA_DIR"
 log "Target branch: $BRANCH"
 log "Node image: $NODE_IMAGE"
+log "HTTPS domain: $DOMAIN"
 
 cd "$PROJECT_ROOT"
 
@@ -72,8 +77,24 @@ log "Frontend build completed successfully"
 
 cd "$INFRA_DIR"
 
+mkdir -p certbot/www certbot/conf
+
+if [[ ! -f "$CERTIFICATE_PATH" ]]; then
+  log "Stopping Nginx before the initial certificate issue"
+  docker compose "${COMPOSE_FILES[@]}" stop nginx || true
+
+  log "Requesting a Let's Encrypt certificate for $DOMAIN"
+  docker compose "${COMPOSE_FILES[@]}" run --rm --service-ports certbot certonly \
+    --standalone \
+    --non-interactive \
+    --agree-tos \
+    --no-eff-email \
+    --email "$LETSENCRYPT_EMAIL" \
+    -d "$DOMAIN"
+fi
+
 log "Starting docker compose services"
-docker compose -f docker-compose.yml -f docker-compose.server.yml up -d
+docker compose "${COMPOSE_FILES[@]}" up -d
 
 log "Deploy completed successfully"
 log "Dist directory: $DIST_DIR"
