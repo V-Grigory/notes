@@ -36,3 +36,11 @@ coverage
 
 api/node/notes.txt
 
+# AI Agents
+.claude
+.junie
+.kilocode
+.opencode
+
+#config-env.sh
+
