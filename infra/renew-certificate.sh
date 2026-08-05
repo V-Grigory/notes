@@ -7,7 +7,7 @@ set -Eeuo pipefail
 
 DOMAIN="grigoryvolchok.ru"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-COMPOSE_FILES=(-f docker-compose.yml -f docker-compose.server.yml)
+SERVER_COMPOSE_FILES=(-f docker-compose.yml -f docker-compose.server.yml)
 
 log() {
   echo "========= [$(date '+%Y-%m-%d %H:%M:%S')] $1"
@@ -23,10 +23,10 @@ cd "$SCRIPT_DIR"
 # Сертификат выпущен с методом standalone, поэтому порт 80 на время проверки
 # должен быть свободен.
 log "Stopping Nginx for Let's Encrypt renewal"
-docker compose "${COMPOSE_FILES[@]}" stop nginx
+docker compose "${SERVER_COMPOSE_FILES[@]}" stop nginx
 
 log "Renewing certificates"
-docker compose "${COMPOSE_FILES[@]}" run --rm --service-ports certbot renew
+docker compose "${SERVER_COMPOSE_FILES[@]}" run --rm --service-ports certbot renew
 
 log "Starting Nginx"
-docker compose "${COMPOSE_FILES[@]}" up -d nginx
+docker compose "${SERVER_COMPOSE_FILES[@]}" up -d nginx
