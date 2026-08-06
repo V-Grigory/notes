@@ -12,7 +12,7 @@ source "$PROJECT_ROOT/deploy/start-app.sh"
 
 trap 'on_error $LINENO' ERR
 
-check_infra
-build_app
-add_cert
-start_app
+check_infra "$@"
+build_app "$@"
+add_cert "$@"
+start_app "$@"
