@@ -5,19 +5,11 @@
 
 set -Eeuo pipefail
 
-DOMAIN="grigoryvolchok.ru"
+PROJECT_ROOT="$(cd "$(dirname "$0")"/.. && pwd)"
+source "$PROJECT_ROOT/deploy/config.sh"
+source "$PROJECT_ROOT/deploy/functions.sh"
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SERVER_COMPOSE_FILES=(-f docker-compose.yml -f docker-compose.server.yml)
-
-log() {
-  echo "========= [$(date '+%Y-%m-%d %H:%M:%S')] $1"
-}
-
-command -v docker >/dev/null 2>&1 || {
-  echo "ERROR: docker is not installed" >&2
-  exit 1
-}
-
 cd "$SCRIPT_DIR"
 
 # Сертификат выпущен с методом standalone, поэтому порт 80 на время проверки
