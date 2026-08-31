@@ -5,9 +5,9 @@ start_app() {
   cd "$INFRA_DIR"
 
   if [[ "$IS_PRODUCTION" == true ]]; then
-    docker compose "${SERVER_COMPOSE_FILES[@]}" up -d
+    docker compose "${SERVER_COMPOSE_FILES[@]}" down && docker compose "${SERVER_COMPOSE_FILES[@]}" up -d
   else
-    docker compose "${LOCAL_COMPOSE_FILES[@]}" up -d
+    docker compose "${LOCAL_COMPOSE_FILES[@]}" down && docker compose "${LOCAL_COMPOSE_FILES[@]}" up -d
   fi
 
   log "Deploy completed successfully"
