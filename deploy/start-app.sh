@@ -1,5 +1,5 @@
 start_app() {
-  echo "#### start_app ..."
+  echo "############################## START_APP ..."
   log "Starting docker compose services"
 
   cd "$INFRA_DIR"
@@ -13,5 +13,5 @@ start_app() {
   log "Deploy completed successfully"
   log "Dist directory: $DIST_DIR"
 
-  echo "#### start_app [OK]"
+  echo "############################## START_APP [OK]"
 }

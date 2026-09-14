@@ -1,5 +1,5 @@
 build_app() {
-  echo "#### build_app ..."
+  echo "############################## BUILD_APP ..."
 
   cd "$PROJECT_ROOT"
 
@@ -34,6 +34,6 @@ build_app() {
   [[ -d "$DIST_DIR" ]] || fail "Build finished, but dist directory was not created: $DIST_DIR"
   [[ -f "$DIST_DIR/index.html" ]] || fail "Build finished, but index.html was not found in dist: $DIST_DIR/index.html"
 
-  echo "#### build_app [OK]"
+  echo "############################## BUILD_APP [OK]"
   echo ""
 }

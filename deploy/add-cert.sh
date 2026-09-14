@@ -1,5 +1,5 @@
 add_cert() {
-  echo "#### add_cert ..."
+  echo "############################## ADD_CERT ..."
 
   cd "$INFRA_DIR"
 
@@ -18,9 +18,9 @@ add_cert() {
       --email "$LETSENCRYPT_EMAIL" \
       -d "$DOMAIN"
 
-      echo "#### add_cert [OK]"
+      echo "############################## ADD_CERT [OK]"
   else
-    echo "#### add_cert [NO NEED]"
+    echo "############################## ADD_CERT [NO NEED]"
   fi
 
   echo ""

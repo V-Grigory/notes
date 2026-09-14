@@ -1,9 +1,9 @@
 log() {
-  echo "=== log === [$(date '+%Y-%m-%d %H:%M:%S')] $1"
+  echo "====== log ====== [$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
 fail() {
-  echo "=== fail === [$(date '+%Y-%m-%d %H:%M:%S')] ERROR: $1" >&2
+  echo "====== fail ====== [$(date '+%Y-%m-%d %H:%M:%S')] ERROR: $1" >&2
   exit 1
 }
 

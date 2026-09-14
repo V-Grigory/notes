@@ -1,5 +1,5 @@
 check_infra() {
-  echo "#### check_infra ..."
+  echo "############################## CHECK_INFRA ... "
 
   [[ -d "$PROJECT_ROOT" ]] || fail "Project root not found: $PROJECT_ROOT"
   [[ -d "$FRONT_DIR" ]] || fail "Frontend directory not found: $FRONT_DIR"
@@ -18,6 +18,6 @@ check_infra() {
   log "Node image: $NODE_IMAGE"
   log "HTTPS domain: $DOMAIN"
 
-  echo "#### check_infra [OK]"
+  echo "############################## CHECK_INFRA [OK]"
   echo ""
 }

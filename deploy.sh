@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# === ЗАПУСК ===
+# ./deploy.sh with-ci   ( доставка + установка зависимостей (npm ci) + build )
+# ./deploy.sh           ( доставка + build )
+
 set -Eeuo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
