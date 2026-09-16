@@ -42,5 +42,6 @@ api/node/notes.txt
 .kilocode
 .opencode
 
+# Deploy app
 config-env.sh
-
+infra/certbot/
