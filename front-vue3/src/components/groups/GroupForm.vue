@@ -1,9 +1,9 @@
 <template>
   <n-modal :show="isOpenModal" transform-origin="center" auto-focus>
     <n-card
-      style="width: 600px"
       :title="formTitle"
       :bordered="false"
+      :style="cardStyle"
       size="huge"
       role="dialog"
       aria-modal="true"
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import type { IGroupData } from "@/types";
 
 const props = defineProps<{
@@ -49,15 +49,12 @@ const emit = defineEmits<{
 }>();
 
 const isOpenModal = ref<boolean>(false);
-watch(
-  () => props.isOpenForm,
-  () => {
-    props.isOpenForm && initFormValues();
-    isOpenModal.value = props.isOpenForm;
-  }
-);
-
 const formValues = ref<IGroupData>(props.formData);
+const isMobile = true; // TODO: определить где то глобально
+
+const cardStyle = computed<string>(() => {
+  return isMobile ? "position: fixed; top: 0;" : "width: 600px;";
+});
 
 const initFormValues = (): void => {
   formValues.value = Object.assign({}, props.formData);
@@ -70,6 +67,14 @@ const applyEdit = (): void => {
 const cancelEdit = (): void => {
   emit("formClosed");
 };
+
+watch(
+  () => props.isOpenForm,
+  () => {
+    props.isOpenForm && initFormValues();
+    isOpenModal.value = props.isOpenForm;
+  }
+);
 </script>
 
 <style scoped></style>

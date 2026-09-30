@@ -1,31 +1,43 @@
 <template>
-  <div v-for="(item, index) in items" :key="index" class="list-item-wrapper">
+  <n-button
+    @click="toggleShowGroups"
+    :color="isShowGroups ? '#57534D' : ''"
+    size="tiny"
+    type="tertiary"
+    round
+  >
+    Группы
+  </n-button>
+
+  <div v-if="isShowGroups" class="groups-wrapper">
     <n-button
-      @click="setActiveItem(item)"
+      @click="addItem"
       strong
-      secondary
       round
-      class="select-list-item-button"
+      type="primary"
+      class="add-list-item-button"
     >
-      {{ item.groupTitle }}
+      +
     </n-button>
 
-    <edit-icon @click="editItem(item)" class="edit-list-item-icon" />
+    <!-- TODO: внедрить использование utility классов -->
+    <span v-for="(item, index) in items" :key="index" class="list-item-wrapper">
+      <n-button
+        @click="setActiveItem(item)"
+        strong
+        round
+        class="select-list-item-button"
+      >
+        {{ item.groupTitle }}
+        <!-- TODO: использовать компонент иконок из ui native -->
+        <edit-icon @click.stop="editItem(item)" class="edit-list-item-icon" />
+      </n-button>
+    </span>
   </div>
-
-  <n-button
-    @click="addItem"
-    strong
-    secondary
-    block
-    type="primary"
-    class="add-list-item-button"
-  >
-    +
-  </n-button>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import type { IGroupData } from "@/types";
 import EditIcon from "@/components/ui/EditIcon.vue";
 
@@ -38,6 +50,12 @@ const emit = defineEmits<{
   (e: "editItem", formData: IGroupData): void;
   (e: "addItem"): void;
 }>();
+
+const isShowGroups = ref<boolean>(false);
+
+const toggleShowGroups = (): void => {
+  isShowGroups.value = !isShowGroups.value;
+};
 
 const setActiveItem = (item: IGroupData): void => {
   emit("setActiveGroup", item);
@@ -53,26 +71,20 @@ const addItem = (): void => {
 </script>
 
 <style scoped>
-.list-item-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.groups-wrapper {
+  margin-top: 10px;
 }
+.list-item-wrapper {}
 .select-list-item-button {
   text-wrap: initial;
-  margin: 3px 0;
-  width: 190px;
-  min-height: 34px;
-  height: auto;
-  padding: 10px 15px;
+  margin: 3px;
+  color: #57534D;
 }
 .edit-list-item-icon {
-  cursor: pointer;
+  margin-left: 5px;
 }
-.edit-list-item-icon:hover {
-  color: grey;
-}
+.edit-list-item-icon:hover {}
 .add-list-item-button {
-  margin-top: 15px;
+  margin: 3px;
 }
 </style>

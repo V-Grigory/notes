@@ -5,17 +5,12 @@
         <h2>Notes</h2>
       </n-layout-header>
 
-      <n-layout has-sider>
+      <n-layout-content content-style="padding: 10px;">
         <n-message-provider placement="bottom-right">
-          <n-layout-sider content-style="padding: 24px;">
-            <groups-manager />
-          </n-layout-sider>
-
-          <n-layout-content content-style="padding: 24px;">
-            <notes-manager />
-          </n-layout-content>
+          <groups-manager />
+          <notes-manager />
         </n-message-provider>
-      </n-layout>
+      </n-layout-content>
 
       <n-layout-footer> by Grigory Volchok </n-layout-footer>
     </n-layout>
@@ -48,15 +43,10 @@ onMounted(() => loadNotes());
 h2 {
   margin: 0;
 }
+
 .n-layout-header,
 .n-layout-footer {
-  background: #b5c0d0;
-  padding: 24px;
-}
-.n-layout-sider {
-  background: rgba(128, 128, 128, 0.3);
-}
-.n-layout-content {
-  background: rgba(128, 128, 128, 0.1);
+  background: #b0c4de;
+  padding: 10px;
 }
 </style>
