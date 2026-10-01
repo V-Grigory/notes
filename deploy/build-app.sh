@@ -17,12 +17,16 @@ build_app() {
   log "Removing old dist directory"
   rm -rf "$DIST_DIR"
 
+  CHOWN_DIST="chown -R $(id -u):$(id -g) /app/dist"
+  CHOWN_MODULES="chown -R $(id -u):$(id -g) /app/node_modules"
+
+  BUILD_COMMAND="npm run build && $CHOWN_DIST && $CHOWN_MODULES"
+
   if [[ "${1:-}" == "with-ci" ]]; then
     log "Building with npm ci and npm run build"
-    BUILD_COMMAND="npm ci && npm run build && chown -R $(id -u):$(id -g) /app/dist"
+    BUILD_COMMAND="npm ci && $BUILD_COMMAND"
   else
     log "Building with npm run build only"
-    BUILD_COMMAND="npm run build && chown -R $(id -u):$(id -g) /app/dist"
   fi
 
   docker run --rm \
